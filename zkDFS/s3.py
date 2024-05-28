@@ -34,13 +34,13 @@ class zkDFS:
         return idx,r
 
     def get(self,key):
-        #returns file content, and merkel proof.
+        #returns file content as raw bytes, and merkel proof.
         assert key in self.s3Key2Idx
         file = self.bucket.Object(key=key).get()["Body"].read()
         proof = self.mt.open(self.fileIdx(key))
-        return {'content':file,'proof':proof}
+        return {'content':file,'proof':proof[0]}
 
 if __name__ == "__main__":
     bName = 'verkel-tree-file-system-test'
     fs = zkDFS(bName)
-    print(fs.listKeys())
+    print(fs.get('text_chunks_and_embedding.csv')['proof'])
