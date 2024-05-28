@@ -1,0 +1,8 @@
+build
+migrations
+truffle-config.js
+*.txt
+*.csv
+AI/node_modules
+.DS_Store
+*/__pycache__
